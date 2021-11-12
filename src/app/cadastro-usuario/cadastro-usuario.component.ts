@@ -25,10 +25,12 @@ export class CadastroUsuarioComponent implements OnInit {
 
   ngOnInit() {}
 
-  public async cadastraUsuario(body: Usuario) {
+  public async cadastraUsuario() {
+    const body = this.form.getRawValue();
     const response = this.service.registraUsuario(body);
 
     if(response) {
+      console.log(response)
       console.log('cadastrado com sucesso!');
     } else {
       console.log('Ocorreu algum erro ao cadastrar');

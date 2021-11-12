@@ -2,13 +2,19 @@
 <form [formGroup]="form">
   <ion-grid>
     <ion-col size="12">
-      <input type="text" formControlName="nome">
+      <ion-label position="fixed">Nome: </ion-label>
+      <ion-input autofocus clearInput type="text" formControlName="nome" color="medium"></ion-input>
     </ion-col>
     <ion-col size="12">
-      <input type="email" formControlName="email">
+      <ion-label position="fixed">Email: </ion-label>
+      <ion-input clearInput type="email" formControlName="email"color="medium"></ion-input>
     </ion-col>
     <ion-col size="12">
-      <input type="password" formControlName="senha">
+      <ion-label position="fixed">Senha: </ion-label>
+      <ion-input clearInput type="password" formControlName="senha"color="medium"></ion-input>
     </ion-col>
+    <ion-button color="primary" (click)="cadastraUsuario()">
+      Cadastrar
+    </ion-button>
   </ion-grid>
 </form>

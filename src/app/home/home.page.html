@@ -22,8 +22,8 @@
       <ion-label>Photo</ion-label>
     </ion-tab-button> -->
 
-    <ion-button>
-      <ion-icon name="add-circle-outline" ></ion-icon>
+    <ion-button (click)="presentModal()">
+      <ion-icon name="add-circle-outline"></ion-icon>
     </ion-button>
     <ion-button>
       <ion-icon name="folder"></ion-icon> 
@@ -31,17 +31,19 @@
   </ion-card>
 
   <ion-card *ngFor="let item of tasks">
-    <ion-card-title >  
-      {{item.titulo}}
-    </ion-card-title>
-    <ion-card-subtitle>
+    <div padding>
+      <ion-card-title padding>  
+        {{item.titulo}}
+      </ion-card-title >
+      <ion-card-subtitle padding>
       {{item.tipo}}
     </ion-card-subtitle>
-
-    <ion-card-content>
+    
+    <ion-card-content padding>
       <p>
         {{item.descricao}}
       </p>
     </ion-card-content>
+  </div>
   </ion-card>
 </ion-content>

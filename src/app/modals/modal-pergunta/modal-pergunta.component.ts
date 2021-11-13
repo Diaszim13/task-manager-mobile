@@ -1,7 +1,8 @@
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { HomeService } from 'src/app/home/services/home.service';
+import { Tasks } from 'src/app/home/models/tasks';
 
 @Component({
   selector: 'app-modal-pergunta',
@@ -11,25 +12,35 @@ import { HomeService } from 'src/app/home/services/home.service';
 export class ModalPerguntaComponent implements OnInit {
 
   form:FormGroup;
+
+  task: Tasks[] = []
+
   constructor(public FormBuilder: FormBuilder,
-              public service: HomeService
-    ) { }
+              public service: HomeService,
+              public ModalController: ModalController
+    ) { 
+      this.form = new FormGroup({
+        titulo: new FormControl('', [Validators.required, Validators.min(3)]),
+        descricao: new FormControl('', [Validators.required, Validators.min(10)]),
+        tipo: new FormControl(''),
+        categoria: new FormControl('')      
+      })
+    }
 
   ngOnInit() {
-    this.form = this.FormBuilder.group({
-      titulo: new FormControl('', [Validators.required, Validators.min(3)]),
-      descricao: new FormControl('', [Validators.required, Validators.min(10)]),
-      tipo: new FormControl(''),
-      categoria: new FormControl('')      
-    })
+  
   }
 
+  dismiss() {
+    this.ModalController.dismiss();
+  }
 
   async createTask() {
       const data = this.form.getRawValue();
       const response = await this.service.createTask(data);
       if(response) {
         console.log(response);
+        this.ModalController.dismiss();
       }
   }
 

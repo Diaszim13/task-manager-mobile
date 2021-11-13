@@ -1,3 +1,5 @@
+import { ModalPerguntaComponent } from './../modals/modal-pergunta/modal-pergunta.component';
+import { ModalController } from '@ionic/angular';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import {Chart} from 'chart.js';
 import { Tasks } from './models/tasks';
@@ -17,15 +19,27 @@ export class HomePage implements OnInit {
     colorArray: any;
 
   constructor(
-      public service: HomeService
-    ) { }
+      public service: HomeService,
+      public modalController: ModalController
+    ) {
+      this.getAllTasks();
+     }
 
     ionViewDidEnter() {
         this.createBarChart();
     }
 
+    async presentModal() {
+      const modal = await this.modalController.create({
+        component: ModalPerguntaComponent,
+        cssClass: 'modal'
+      })
+      return await modal.present();
+    }
+
   async getAllTasks() {
       const response = await this.service.getAllTasks();
+      console.log(response)
       
       if(response) {
         this.tasks = response;
@@ -33,10 +47,6 @@ export class HomePage implements OnInit {
     }
 
   }
-
-//   async createTasks(body: any) {
-//     const response = await this.
-//   }
 
   createBarChart() {
     this.bars = new Chart(this.barChart.nativeElement, {

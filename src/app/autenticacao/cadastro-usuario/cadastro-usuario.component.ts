@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Usuario } from '../models/usuario';
 import { CadastroUsuarioService } from './cadastro-usuario.service';
 
 @Component({
@@ -14,13 +13,13 @@ export class CadastroUsuarioComponent implements OnInit {
   constructor(
     public formBuilder: FormBuilder,
     public service: CadastroUsuarioService
-    ) { 
+    ) {
       this.form = this.formBuilder.group({
         nome: ['', [Validators.required, Validators.min(5)]],
         email: ['', [Validators.required, Validators.email]],
         senha: ['', [Validators.required]],
         tipo: ['USUARIO']
-      })
+      });
     }
 
   ngOnInit() {}
@@ -30,7 +29,7 @@ export class CadastroUsuarioComponent implements OnInit {
     const response = this.service.registraUsuario(body);
 
     if(response) {
-      console.log(response)
+      console.log(response);
       console.log('cadastrado com sucesso!');
     } else {
       console.log('Ocorreu algum erro ao cadastrar');

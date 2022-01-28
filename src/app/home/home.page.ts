@@ -23,7 +23,7 @@ export class HomePage implements OnInit {
       public modalController: ModalController
     ) {
       this.getAllTasks();
-     }
+    }
 
     ionViewDidEnter() {
         this.createBarChart();
@@ -33,17 +33,16 @@ export class HomePage implements OnInit {
       const modal = await this.modalController.create({
         component: ModalPerguntaComponent,
         cssClass: 'modal'
-      })
+      });
       return await modal.present();
     }
 
   async getAllTasks() {
-      const response = await this.service.getAllTasks();
-      console.log(response)
-      
-      if(response) {
-        this.tasks = response;
-        console.log(this.tasks)
+    const response = await this.service.getAllTasks();
+    console.log(response);
+    if(response) {
+      this.tasks = response;
+      console.log(this.tasks);
     }
 
   }

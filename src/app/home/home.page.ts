@@ -14,15 +14,17 @@ export class HomePage implements OnInit {
   basicOptions: any;
 
   public tasks: Tasks[] = [];
+  daysOfWeek: Array<string> = ['SEGUNDA', 'TERCA', 'QUARTA', 'QUINTA', 'SEXTA'];
   @ViewChild('barChart') barChart;
     bars: any;
     colorArray: any;
-
+    tasksByDay = [];
   constructor(
       public service: HomeService,
       public modalController: ModalController
     ) {
       this.getAllTasks();
+      this.getNumTasksPerDay(1);
     }
 
     ionViewDidEnter() {
@@ -39,11 +41,15 @@ export class HomePage implements OnInit {
 
   async getAllTasks() {
     const response = await this.service.getAllTasks();
-    console.log(response);
     if(response) {
       this.tasks = response;
-      console.log(this.tasks);
     }
+  }
+
+  async getNumTasksPerDay(id?: number) {
+    const response = await this.service.getTasksByDay(id);
+    console.log(response);
+    this.tasksByDay = response;
 
   }
 
@@ -51,11 +57,11 @@ export class HomePage implements OnInit {
     this.bars = new Chart(this.barChart.nativeElement, {
       type: 'line',
       data: {
-        labels: ['S1', 'S2', 'S3', 'S4', 'S5', 'S6', 'S7', 'S8'],
+        labels: ['segunda', 'terca', 'quarta', 'quinta', 'sexta'],
         datasets: [{
-          label: 'Viewers in millions',
-          data: [2.5, 3.8, 5, 6.9, 6.9, 7.5, 10, 17],
-          backgroundColor: '#fff', // array should have same number of elements as number of dataset
+          label: 'Afazeres da semana',
+          data: [this.tasksByDay[0].count],
+          backgroundColor: 'black', // array should have same number of elements as number of dataset
           borderColor: '#fff',// array should have same number of elements as number of dataset
           borderWidth: 1
         }]
@@ -69,6 +75,7 @@ export class HomePage implements OnInit {
       }
     });
   }
+
   ngOnInit() {
     this.basicData = {
       labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],

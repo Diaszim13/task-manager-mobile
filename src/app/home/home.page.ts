@@ -1,7 +1,7 @@
 import { ModalPerguntaComponent } from './../modals/modal-pergunta/modal-pergunta.component';
 import { ModalController } from '@ionic/angular';
 import { Component, OnInit, ViewChild } from '@angular/core';
-import {Chart} from 'chart.js';
+import {Chart, ChartItem} from 'chart.js';
 import { Tasks } from './models/tasks';
 import { HomeService } from './services/home.service';
 @Component({
@@ -14,10 +14,11 @@ export class HomePage implements OnInit {
   basicOptions: any;
 
   public tasks: Tasks[] = [];
-  @ViewChild('barChart') barChart;
     bars: any;
     colorArray: any;
 
+  // eslint-disable-next-line @typescript-eslint/member-ordering
+  @ViewChild('barChart') barChart: { nativeElement: ChartItem};
   constructor(
       public service: HomeService,
       public modalController: ModalController
@@ -33,17 +34,17 @@ export class HomePage implements OnInit {
       const modal = await this.modalController.create({
         component: ModalPerguntaComponent,
         cssClass: 'modal'
-      })
+      });
       return await modal.present();
     }
 
   async getAllTasks() {
       const response = await this.service.getAllTasks();
-      console.log(response)
-      
+      console.log(response);
+
       if(response) {
         this.tasks = response;
-        console.log(this.tasks)
+        console.log(this.tasks);
     }
 
   }
@@ -91,35 +92,4 @@ export class HomePage implements OnInit {
       ]
   };
   }
-
-  applyLightTheme() {
-    this.basicOptions = {
-        plugins: {
-            legend: {
-                labels: {
-                    color: '#495057'
-                }
-            }
-        },
-        scales: {
-            x: {
-                ticks: {
-                    color: '#495057'
-                },
-                grid: {
-                    color: '#ebedef'
-                }
-            },
-            y: {
-                ticks: {
-                    color: '#495057'
-                },
-                grid: {
-                    color: '#ebedef'
-                }
-            }
-        }
-    };
-  }
-
 }

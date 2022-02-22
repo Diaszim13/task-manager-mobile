@@ -14,23 +14,30 @@ export class CadastroUsuarioComponent implements OnInit {
   constructor(
     public formBuilder: FormBuilder,
     public service: CadastroUsuarioService
-    ) { 
+    ) {
       this.form = this.formBuilder.group({
         nome: ['', [Validators.required, Validators.min(5)]],
         email: ['', [Validators.required, Validators.email]],
         senha: ['', [Validators.required]],
         tipo: ['USUARIO']
-      })
+      });
     }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.getUsuarios();
+  }
 
+  public async getUsuarios() {
+    const response = await this.service.getUsuarios();
+
+    console.log(response);
+  }
   public async cadastraUsuario() {
     const body = this.form.getRawValue();
     const response = this.service.registraUsuario(body);
 
     if(response) {
-      console.log(response)
+      console.log(response);
       console.log('cadastrado com sucesso!');
     } else {
       console.log('Ocorreu algum erro ao cadastrar');

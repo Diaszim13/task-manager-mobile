@@ -1,6 +1,6 @@
 {
-	"appId": "io.ionic.starter",
-	"appName": "task-manager-mobile",
-	"webDir": "www",
-	"bundledWebRuntime": false
+  "appId": "com.matheusdias.task-manager",
+  "appName": "task-manager-mobile",
+  "webDir": "dist/task-manager",
+  "bundledWebRuntime": false
 }

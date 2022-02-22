@@ -4,5 +4,5 @@ export interface Tasks {
     descricao?: string,
     tipo?: number,
     categoria?: number,
-    idUsuario?: number;
+    idUsuario?: number
 }

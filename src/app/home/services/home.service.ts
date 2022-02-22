@@ -32,5 +32,17 @@ export class HomeService {
           reject(err);
         })
       })
-    } 
+    }
+
+    public getTasksByDay(id?: number): Promise<any> {
+        return new Promise((resolve, reject) => {
+          return this.http.get(`${this.url}tasks/get_tasks_per_day/${id}`).subscribe(
+            (res: any) => {
+              resolve(res);
+            }, (err: any) => {
+              reject(err);
+            }
+          )
+        })
+    }
 }

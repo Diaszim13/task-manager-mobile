@@ -11,28 +11,28 @@ import { Tasks } from 'src/app/home/models/tasks';
 })
 export class ModalPerguntaComponent implements OnInit {
 
-  form:FormGroup;
+  form: FormGroup;
 
-  task: Tasks[] = []
+  task: Tasks[] = [];
 
-  constructor(public FormBuilder: FormBuilder,
+  constructor(public formBuilder: FormBuilder,
               public service: HomeService,
-              public ModalController: ModalController
-    ) { 
+              public modalController: ModalController
+    ) {
       this.form = new FormGroup({
         titulo: new FormControl('', [Validators.required, Validators.min(3)]),
         descricao: new FormControl('', [Validators.required, Validators.min(10)]),
         tipo: new FormControl(''),
-        categoria: new FormControl('')      
-      })
+        categoria: new FormControl('')
+      });
     }
 
   ngOnInit() {
-  
+
   }
 
   dismiss() {
-    this.ModalController.dismiss();
+    this.modalController.dismiss();
   }
 
   async createTask() {
@@ -40,7 +40,7 @@ export class ModalPerguntaComponent implements OnInit {
       const response = await this.service.createTask(data);
       if(response) {
         console.log(response);
-        this.ModalController.dismiss();
+        this.modalController.dismiss();
       }
   }
 

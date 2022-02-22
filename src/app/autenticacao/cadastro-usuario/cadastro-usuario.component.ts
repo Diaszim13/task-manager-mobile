@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Usuario } from '../models/usuario';
 import { CadastroUsuarioService } from './cadastro-usuario.service';
 
 @Component({

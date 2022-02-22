@@ -1,9 +1,10 @@
 ion-input {
-    --background: white;
     border-radius: 5em;
-    padding: 5px;
+    padding: 10px;
     margin: 5px;
-    --placeholder-color: black !important;
+}
+ion-label {
+  padding: 10px;
 }
 
 ion-button {

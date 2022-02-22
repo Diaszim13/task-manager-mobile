@@ -7,8 +7,8 @@ import { IonicModule } from '@ionic/angular';
 import { AutenticacaoPageRoutingModule } from './autenticacao-routing.module';
 
 import { AutenticacaoPage } from './autenticacao.page';
-import { CadastroUsuarioComponent } from '../cadastro-usuario/cadastro-usuario.component';
-import { LoginComponent } from '../login/login.component';
+import { CadastroUsuarioComponent } from './cadastro-usuario/cadastro-usuario.component';
+import { LoginComponent } from './login/login.component';
 import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
